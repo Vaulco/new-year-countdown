@@ -30,7 +30,7 @@ const CountdownTimer: FC = () => {
 
     const calculateTimeLeft = () => {
       const now = new Date();
-      const targetDate = new Date(targetYear, 0, 1); // January 1st of target year
+      const targetDate = new Date(targetYear, 0, 1);
       const difference = targetDate.getTime() - now.getTime();
 
       if (difference > 0) {
@@ -43,12 +43,10 @@ const CountdownTimer: FC = () => {
         setCurrentTime(now);
         setIsComplete(false);
       } else {
-        // When countdown reaches zero, show completion state
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         setCurrentTime(now);
         setIsComplete(true);
 
-        // After 3 seconds, start countdown for next year
         setTimeout(() => {
           setTargetYear(targetYear + 1);
           setIsComplete(false);
@@ -68,7 +66,7 @@ const CountdownTimer: FC = () => {
   const TimeUnit = ({ value, digits, show }: { value: number; digits: number; show: boolean }) => {
     if (!show) return null;
     return (
-      <span className="rounded px-3 py-2 transition-all text-[60px]">
+      <span className="rounded px-2 sm:px-3 py-1 sm:py-2 transition-all text-2xl sm:text-4xl md:text-[60px]">
         {formatNumber(value, digits)}
       </span>
     );
@@ -77,7 +75,7 @@ const CountdownTimer: FC = () => {
   const Separator = ({ show }: { show: boolean }) => {
     if (!show) return null;
     return (
-      <span className="mx-1 text-[15px]">•</span>
+      <span className="mx-1 text-xs sm:text-sm md:text-[15px]">•</span>
     );
   };
 
@@ -101,18 +99,17 @@ const CountdownTimer: FC = () => {
     return null;
   }
 
-  // Determine which units to show based on their values
   const showDays = timeLeft.days > 0;
   const showHours = showDays || timeLeft.hours > 0;
   const showMinutes = showHours || timeLeft.minutes > 0;
   const showSeconds = showMinutes || timeLeft.seconds > 0;
 
   return (
-    <div className="grid grid-rows-[20px_1fr_auto] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <div className="flex items-center gap-2 text-4xl font-mono">
+    <div className="grid grid-rows-[20px_1fr_auto] items-center justify-items-center min-h-screen p-4 sm:p-8 pb-10 sm:pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-4 sm:gap-8 row-start-2 items-center">
+        <div className="flex items-center gap-1 sm:gap-2 text-2xl sm:text-4xl font-mono">
           {isComplete ? (
-            <div className="text-[60px] font-bold animate-bounce">
+            <div className="text-3xl sm:text-4xl md:text-[60px] font-bold animate-bounce">
               {targetYear}
             </div>
           ) : (
@@ -128,13 +125,13 @@ const CountdownTimer: FC = () => {
           )}
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center font-mono text-[#686767]">
+      <footer className="row-start-3 flex gap-3 sm:gap-6 flex-wrap items-center justify-center font-mono text-[#686767]">
         {currentTime && (
           <>
-            <div className="text-[15px]">
+            <div className="text-xs sm:text-sm md:text-[15px]">
               {formatDateForFooter(currentTime)}
             </div>
-            <div className="font-mono">
+            <div className="font-mono text-xs sm:text-sm md:text-[15px]">
               {formatTimeForFooter(currentTime)}
             </div>
           </>
