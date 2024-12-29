@@ -9,7 +9,14 @@ interface TimeLeft {
   seconds: number;
 }
 
-const CountdownTimer: FC = () => {
+interface BackgroundMusicProps {
+  videoId?: string;
+}
+
+const CountdownTimer: FC<BackgroundMusicProps> = ({ 
+  // Default: "The Final Countdown" by Europe
+  videoId = 'JjjNa8khhww&t'
+}) => {
   const [mounted, setMounted] = useState(false);
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
@@ -106,6 +113,13 @@ const CountdownTimer: FC = () => {
 
   return (
     <div className="grid grid-rows-[20px_1fr_auto] items-center justify-items-center min-h-screen p-4 sm:p-8 pb-10 sm:pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
+      {/* Hidden background music player */}
+      <iframe
+        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&showinfo=0&loop=1&playlist=${videoId}`}
+        allow="autoplay"
+        style={{ display: 'none' }}
+      />
+      
       <main className="flex flex-col gap-4 sm:gap-8 row-start-2 items-center">
         <div className="flex items-center gap-1 sm:gap-2 text-2xl sm:text-4xl font-mono">
           {isComplete ? (
