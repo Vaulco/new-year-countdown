@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface TimeLeft {
   days: number;
@@ -9,14 +9,10 @@ interface TimeLeft {
   seconds: number;
 }
 
-interface BackgroundMusicProps {
-  videoId?: string;
-}
+// Default video ID for "The Final Countdown" by Europe
+const VIDEO_ID = 'JjjNa8khhww&t';
 
-const CountdownTimer: FC<BackgroundMusicProps> = ({ 
-  // Default: "The Final Countdown" by Europe
-  videoId = 'JjjNa8khhww&t'
-}) => {
+export default function CountdownPage() {
   const [mounted, setMounted] = useState(false);
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
@@ -115,7 +111,7 @@ const CountdownTimer: FC<BackgroundMusicProps> = ({
     <div className="grid grid-rows-[20px_1fr_auto] items-center justify-items-center min-h-screen p-4 sm:p-8 pb-10 sm:pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
       {/* Hidden background music player */}
       <iframe
-        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&showinfo=0&loop=1&playlist=${videoId}`}
+        src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&controls=0&showinfo=0&loop=1&playlist=${VIDEO_ID}`}
         allow="autoplay"
         style={{ display: 'none' }}
       />
@@ -153,6 +149,4 @@ const CountdownTimer: FC<BackgroundMusicProps> = ({
       </footer>
     </div>
   );
-};
-
-export default CountdownTimer;
+}
