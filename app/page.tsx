@@ -9,9 +9,6 @@ interface TimeLeft {
   seconds: number;
 }
 
-// Default video ID for "The Final Countdown" by Europe
-const VIDEO_ID = 'JjjNa8khhww&t';
-
 export default function CountdownPage() {
   const [mounted, setMounted] = useState(false);
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
@@ -109,13 +106,6 @@ export default function CountdownPage() {
 
   return (
     <div className="grid grid-rows-[20px_1fr_auto] items-center justify-items-center min-h-screen p-4 sm:p-8 pb-10 sm:pb-20 gap-8 sm:gap-16 font-[family-name:var(--font-geist-sans)]">
-      {/* Hidden background music player */}
-      <iframe
-        src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&controls=0&showinfo=0&loop=1&playlist=${VIDEO_ID}`}
-        allow="autoplay"
-        style={{ display: 'none' }}
-      />
-      
       <main className="flex flex-col gap-4 sm:gap-8 row-start-2 items-center">
         <div className="flex items-center gap-1 sm:gap-2 text-2xl sm:text-4xl font-mono">
           {isComplete ? (
